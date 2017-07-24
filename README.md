@@ -10,3 +10,9 @@ cd vue2.ele.me
 npm install
 
 npm run dev (访问本地，运行后访问 http://localhost:8080)
+# 项目功能
+项目功能基本参照并模拟官方版本
+* 首页
+  > 定位
+  > 搜索地址
+  > 地址附近商家列表
