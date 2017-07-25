@@ -46,7 +46,10 @@
 					<p>饿了么正在以光速来到你身边</p>
 				</section>
 
-				<restaurant-list v-if="initStatus"></restaurant-list>
+				<section class="restaurant-sect">
+					<restaurant-list v-if="initStatus"></restaurant-list>
+				</section>
+
 			</div>
 			<footer-bar></footer-bar>
 		</div>
@@ -56,12 +59,12 @@
 
 <script>
 	import {mapGetters, mapMutations, mapActions} from 'vuex'
-	import utilsMixin from '@/components/mixin'
+	import utilsMixin from 'components/mixin'
 	import entrySwipe from './children/entrySwipe'
-	import restaurantList from '@/components/common/restaurantList'
+	import restaurantList from 'components/common/restaurantList'
 	import searchAddress from './children/searchAddress'
-	import footerBar from '@/components/footer/footerBar'
-
+	import footerBar from 'components/footer/footerBar'
+	// import loading from '@/components/common/loading'
 
 	export default {
 		name: 'home',
@@ -115,13 +118,18 @@
 			searchAddressOpen () {
 				this.$refs.searchAddress.open();
 			},
-			loadMore () {
-				this.busy = 1;
-				console.log('loading... ' + new Date());
-			}
+			// loadMore () {
+			// 	this.busy = 1;
+			// 	console.log('loading... ' + new Date());
+			// }
 		},
 
-		components: {footerBar, entrySwipe, restaurantList, searchAddress}
+		components: {
+			footerBar,
+			entrySwipe,
+			restaurantList,
+			searchAddress,
+		}
 	}
 </script>
 
@@ -247,5 +255,8 @@
 	p {
 		color: $fc9;
 	}
+}
+.restaurant-sect {
+	padding: 0 0 4rem;
 }
 </style>

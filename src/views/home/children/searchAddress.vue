@@ -8,9 +8,7 @@
                 </div>
             </header>
             <section class="search-sect">
-                <!-- <form> -->
                     <input type="search" placeholder="请输入地址" autofocus="autofocus" class="" @keyup.13="searchAddressNearby" v-model="address">
-                <!-- </form> -->
 
             </section>
             <section class="address-list" v-if="addressList.length">
@@ -24,7 +22,8 @@
 </template>
 <script>
     import {mapGetters, mapMutations, mapActions} from 'vuex'
-    import popup from '@/components/popup/popup'
+    // import headerBar from 'components/header/headerBar'
+    import popup from 'components/popup/popup'
     export default {
         name: 'search-address',
         props: ['mode'],

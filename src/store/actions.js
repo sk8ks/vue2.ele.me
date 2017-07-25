@@ -20,7 +20,7 @@ export default {
         const res = await fetchEntries(coords);
         const entries = res[0].entries.map((e,i,ary) => {
             const newlink = decodeURIComponent(e.link);
-            return Object.assign({}, e, {link: '#geohash='+geohash+'#'+newlink.slice(newlink.indexOf('?target'))});
+            return Object.assign({}, e, {link: '#geohash='+geohash+'#'+newlink.slice(newlink.indexOf('target'))});
         });
         let entryList = Array.from({length: Math.ceil(entries.length/8)}, () => []);
         entryList.length && entries.map((v,i,s) => entryList[parseInt(i/8)].push(v));

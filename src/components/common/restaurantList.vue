@@ -1,6 +1,6 @@
 <template>
     <section class="restaurant-list">
-        <section class="item" v-for="(item, index_0) in restaurantList" :key="index_0">
+        <div class="item" v-for="(item, index_0) in restaurantList" :key="index_0">
             <div class="logo">
                 <div class="new" v-if="item.is_new"><span>新店</span></div>
                 <img :alt="item.name" :src="item.image_path">
@@ -65,7 +65,7 @@
                     </div>
                 </section>
             </div>
-        </section>
+        </div>
     </section>
 </template>
 <script>
@@ -115,7 +115,6 @@
 <style lang="scss" scoped>
 @import '../../style/mixin';
 .restaurant-list {
-    padding: 0 0 4rem;
 
     .item {
         display: -webkit-flex;

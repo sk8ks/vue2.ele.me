@@ -9,11 +9,15 @@ $fc9: #999;
 	background-image: linear-gradient(90deg,#0af,#0085ff);
 }
 @mixin page {
-	position: absolute;
-	left: 0;
-	top: 0;
 	@include wh;
-	overflow: hidden;
+	// overflow: hidden;
+}
+@mixin abs($left: 0, $right: 0, $top: 0, $bottom: 0) {
+	position: absolute;
+	left: $left;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
 }
 @mixin popup {
 	position: fixed;
@@ -47,6 +51,11 @@ $fc9: #999;
 //定位全屏
 @mixin allcover{
 	position:absolute;
+	top:0;
+	right:0;
+}
+@mixin fixed{
+	position:fixed;
 	top:0;
 	right:0;
 }
@@ -124,3 +133,13 @@ $fc9: #999;
 @mixin transform($attr) {
 	transform: $attr;
 }
+// @@mixin animation($name: animation, $duration: 1s, $timingFn:  ) {
+// 	animation-name: projector;
+// 	animation-duration: 1.5s;
+// 	animation-timing-function: steps(43, end);
+// 	animation-delay: initial;
+// 	animation-iteration-count: infinite;
+// 	animation-direction: normal;
+// 	animation-fill-mode: initial;
+// 	animation-play-state: initial;
+// }

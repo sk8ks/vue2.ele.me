@@ -9,8 +9,8 @@
 /**
  *	是否为空数组
  */
-export const isEmptyArray = ary => {
-	return Array.isArray(ary) && !ary.length;
+export const isEmptyArray = arr => {
+	return Array.isArray(arr) && !arr.length;
 }
 
 /**
@@ -36,6 +36,47 @@ export const deep2Shallow = source => {
 		!isEmptyObject(source[k]) ? Object.assign( target, deep2Shallow(source[k]) ) : target[k] = source[k];
 	}
 	return target;
+	// }
+}
+/**
+ * 序列化对象
+ * @param  {[string]} serializeString [description]
+ * @return {[type]}                 [description]
+ */
+export const serializeObject = serializeString => {
+	return typeof serializeString === 'string' ? serializeString.split('&').map((v,i,a) => {
+		const kv = v.split('=');
+		return Object.defineProperty({}, kv[0], {
+			value: typeof kv[1] === 'string' &&  kv[1].indexOf('=') > -1 ? serializeObject(kv[1]) : kv[1],
+			enumerable:true,
+		});
+	}) : '';
+}
+/**
+ * 数组转对象 [{a:1},{b:1},[{c:1}]] => {a:1, b:1, c:1}
+ * @param  {[array]} arr [数组]
+ * @return {[object]}     [一个对象]
+ */
+export const array2Object = (arr = [], obj = {}) => {
+	Array.isArray(arr) ?
+		arr.forEach((v,i,a) => {
+			Array.isArray(v) ?
+				Object.assign(obj, array2Object(v, obj)) : typeof v === 'object' ?
+					Object.assign(obj, v) : Object.defineProperty(obj, i, {value: v});
+		}) : Object.defineProperty(obj, 0, {value: arr});
+	return obj;
+
+
+	// if (Array.isArray(arr)) {
+	// 	arr.forEach((v,i,a) => {
+	// 		if (Array.isArray(v)) {
+	// 			Object.assign(_obj_, array2Object(v, obj));
+	// 		} else if (typeof v === 'object') {
+	// 			Object.assign(_obj_, v);console.log(_obj_, v)
+	// 		} else {
+	// 			Object.defineProperty(_obj_, i, {value: v});
+	// 		}
+	// 	})
 	// }
 }
 /**
