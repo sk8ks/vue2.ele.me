@@ -64,7 +64,6 @@
 	import restaurantList from 'components/common/restaurantList'
 	import searchAddress from './children/searchAddress'
 	import footerBar from 'components/footer/footerBar'
-	// import loading from '@/components/common/loading'
 
 	export default {
 		name: 'home',
