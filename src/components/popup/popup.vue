@@ -15,6 +15,8 @@
 </template>
 <script>
     import {mapGetters, mapMutations, mapActions} from 'vuex'
+    import mixins from 'components/mixin'
+    import {eventHub} from 'components/common/eventHub'
     export default {
         name: 'popup',
         props: [ 'dir', 'mode', 'slotname'],
@@ -30,14 +32,20 @@
 		watch: {
 			show () {this.overlay = this.show ? 'modal-overlay-visible' : ''}
 		},
-        activated () {},
+        created () {
+             eventHub.$on('popupOpen', this.open);
+             eventHub.$on('popupClose', this.close);
+        },
         mounted () {},
+        mixins: [mixins],
 		methods: {
 			open (cb) {
+                this.noScroll(!!1);
 				this.show = 1;
 				typeof cb === 'function' && cb();
 			},
 			close (cb) {
+                this.noScroll(!1);
 				this.show = !1;
 				typeof cb === 'function' && cb();
 			}

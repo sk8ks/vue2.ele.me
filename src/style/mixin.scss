@@ -4,6 +4,11 @@ $fc: #fff;
 $fc6a: #6a6a6a;
 $fc9: #999;
 
+.no-scroll {
+	height: 100%;
+	overflow: hidden;
+}
+
 @mixin bgimg {
 	background-image: -webkit-linear-gradient(left,#0af,#0085ff);
 	background-image: linear-gradient(90deg,#0af,#0085ff);
@@ -80,7 +85,7 @@ $fc9: #999;
     transform: translateY(-50%);
 }
 
-//定位上下居中
+//定位左右居中
 @mixin cl {
 	position: absolute;
 	left: 50%;
@@ -126,9 +131,12 @@ $fc9: #999;
 	// -webkit-justify-content: $justify;
 	justify-content: $justify;
 }
+@mixin item-flex($grow: 1, $shrink: 1, $basis: 0) {
+	flex: $grow $shrink $basis
+}
 //
 @mixin transition($time: .3s, $effect: ease ) {
-	transition: All $time $effect;
+	transition: all $time $effect;
 }
 @mixin transform($attr) {
 	transform: $attr;

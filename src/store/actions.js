@@ -3,8 +3,10 @@ import {
     fetchEntries,
     fetchHotSearchWords,
     fetchRestaurants,
-    fetchAddressNearby
+    fetchAddressNearby,
+    fetchCategory,
 } from '@/service'
+import {sleep} from 'components/common/utils'
 
 export default {
     // 通过经纬度获取地理信息
@@ -32,16 +34,29 @@ export default {
         const coords = getters.coordinates;
         commit('RECORD_HOT_SEARCH_WORDS', await fetchHotSearchWords(coords));
     },
-
-    async restaurantsAction({commit, getters, state}) {
+    // 餐馆列表数据
+    async restaurantsAction({commit, getters, state}, query = {}) {
         const coords = getters.coordinates;
-        let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}));
-        restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r))
-        commit('RECORD_RESTAURANT_LIST', restaurantList);
+        let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
+        restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r));
+        await sleep(1000).then(() => commit('RECORD_RESTAURANT_LIST', restaurantList));
+
+    },
+    // 根据筛选参数返回餐馆列表
+    async filterRestaurantsAction({commit, getters, state}, query = {}) {
+        const coords = getters.coordinates;
+        let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
+        restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r));
+        await sleep(1000).then(() => commit('RECORD_RESTAURANT_LIST', restaurantList.reverse()));
     },
     // 附近地区
     searchAddressNearbyAction({commit, getters, state}, query) {
         const coords = getters.coordinates;
         return fetchAddressNearby( Object.assign({}, coords, {offset: 0, limit: 20}, query) );
+    },
+    // 分类数据
+    categoryAction({commit, getters, state}, query) {
+        const coords = getters.coordinates;
+        return fetchCategory( Object.assign({}, coords, query) );
     }
 }

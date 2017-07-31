@@ -13,7 +13,7 @@
                     </div>
                 </section>
                 <section class="rating-sect">
-                    <div class="rating-wraper">
+                    <div class="rating-wrapper">
                         <div class="rating">
                             <div class="rating-max">
                                 <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#rating-star"></use></svg>
@@ -326,7 +326,7 @@
                     border: #eee solid 1px;
                 }
             }
-            .rating-wraper {
+            .rating-wrapper {
                 @include flex();
                 @include flex-align(center);
                 font-size: .9rem;
@@ -341,6 +341,7 @@
                     }
                     .rating-count {
                         position: absolute;
+                        left: 0;
                         @include flex();
                         overflow: hidden;
                         svg {

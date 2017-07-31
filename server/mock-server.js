@@ -8,7 +8,8 @@ const {
     entries,
     hotSearchWords,
     restaurants,
-    searchAddressNearby
+    searchAddressNearby,
+    categories,
 } = require('./data/index')
 // var geolocation = require('./data/geolocation');
 // var entries = require('./data/entries');
@@ -28,6 +29,9 @@ router.get('/restaurants', (req, res, next) => {
 });
 router.get('/search_address_nearby', (req, res, next) => {
     res.json(searchAddressNearby);
+});
+router.get('/category', (req, res, next) => {
+    res.json(categories);
 });
 
 module.exports = router;

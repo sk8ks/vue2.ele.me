@@ -1,9 +1,12 @@
 <template>
-    <popup slotname="searchAddress" :mode="mode" ref="popup">
+    <popup
+        slotname="searchAddress"
+        :mode="mode"
+        ref="popup">
         <div class="address-panel" slot="searchAddress">
             <header class="address-header">
-                <div class="head-wraper">
-                    <button class="btn-back" @click="close"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use></svg></button>
+                <div class="head-wrapper">
+                    <button class="btn-back" @click="popupClose"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use></svg></button>
                     <h1 class="title">选择地址</h1>
                 </div>
             </header>
@@ -22,7 +25,7 @@
 </template>
 <script>
     import {mapGetters, mapMutations, mapActions} from 'vuex'
-    // import headerBar from 'components/header/headerBar'
+    import {eventHub} from 'components/common/eventHub'
     import popup from 'components/popup/popup'
     export default {
         name: 'search-address',
@@ -38,10 +41,13 @@
                 'coordinates'
             ]),
         },
-        activated () {},
+        created () {
+            eventHub.$on('searchAddressOpen', this.popupOpen)
+        },
         mounted () {
 
         },
+
         methods: {
             ...mapActions([
                 'searchAddressNearbyAction',
@@ -50,11 +56,11 @@
                 'entriesAction',
                 'restaurantsAction',
             ]),
-            open () {
-                this.$refs.popup.open()
+            popupOpen () {
+                eventHub.$emit('popupOpen');
             },
-            close () {
-                this.$refs.popup.close();
+            popupClose () {
+                eventHub.$emit('popupClose');
                 this.address = '';
             },
             searchAddressNearby () {
@@ -91,7 +97,7 @@
     color: #fff;
     font-size: .48rem;
     background: #2395ff;
-    .head-wraper {
+    .head-wrapper {
         @include flex();
         @include flex-align();
         @include wh;

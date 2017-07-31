@@ -1,7 +1,7 @@
 <template>
 	<div class="page" >
 		<div class="wrapper">
-			<div class="scroll-wraper" >
+			<div class="scroll-wrapper" >
 				<header class="geo-header">
 					<div class="bar">
 						<div class="get-address" @click="searchAddressOpen">
@@ -59,12 +59,12 @@
 
 <script>
 	import {mapGetters, mapMutations, mapActions} from 'vuex'
-	import utilsMixin from 'components/mixin'
+	import {eventHub} from 'components/common/eventHub'
+	import mixins from 'components/mixin'
 	import entrySwipe from './children/entrySwipe'
 	import restaurantList from 'components/common/restaurantList'
 	import searchAddress from './children/searchAddress'
 	import footerBar from 'components/footer/footerBar'
-	// import loading from '@/components/common/loading'
 
 	export default {
 		name: 'home',
@@ -87,7 +87,7 @@
 			initStatus () {return !this.geoError}
 		},
 		activated () {},
-		mixins: [utilsMixin],
+		mixins: [mixins],
 		mounted () {
 			this.loadStatus = 1;
 			let geo = this.geoLocation(pos => {
@@ -116,7 +116,8 @@
 			// },
 			// 显示选择地址
 			searchAddressOpen () {
-				this.$refs.searchAddress.open();
+				eventHub.$emit('searchAddressOpen');
+				// this.$refs.searchAddress.open();
 			},
 			// loadMore () {
 			// 	this.busy = 1;
@@ -142,7 +143,7 @@
 		overflow-y: auto;
 	}
 }
-.scroll-wraper {
+.scroll-wrapper {
 	height: 100%;
 }
 .geo-header {
