@@ -10,6 +10,8 @@ cd vue2.ele.me
 npm install
 
 npm run dev (访问本地，运行后访问 http://localhost:8080)
+# 在线DEMO
+http://rossi.wang:3001
 # 项目功能
 项目功能基本参照并模拟官方版本
 * 首页
