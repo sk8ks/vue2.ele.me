@@ -30,13 +30,11 @@ export const isEmptyObject = obj => obj && (isObject(obj) && !Object.keys(obj).l
  *	把一个多层对象转化为单层对象
  */
 export const deep2Shallow = source => {
-	// if ( !isEmptyObject(source) ) {
 	let target = {};
 	for (let k in source) {
 		!isEmptyObject(source[k]) ? Object.assign( target, deep2Shallow(source[k]) ) : target[k] = source[k];
 	}
 	return target;
-	// }
 }
 /**
  * 序列化对象
@@ -79,6 +77,7 @@ export const array2Object = (arr = [], obj = {}) => {
 	// 	})
 	// }
 }
+
 /**
  *	把对象转化为数组
  */
@@ -163,3 +162,16 @@ export const throttle = (fn, delay) => {
     	}
   	};
 };
+/**
+ * 睡眠函数，模拟响应时间
+ * @param  {Number} ms [description]
+ * @return {[type]}    [description]
+ */
+async function timeout (ms) {
+	await new Promise(resolve => {
+    	setTimeout(resolve, ms);
+  	});
+}
+export async function sleep (ms) {
+  	await timeout(ms);
+}
