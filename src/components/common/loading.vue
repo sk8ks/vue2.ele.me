@@ -1,5 +1,5 @@
 <template>
-    <div class="loading-wrap">
+    <div class="loading-wrap" v-if="status">
         <div class="loading-box">
             <div class="loading-circle"></div>
         </div>
@@ -9,13 +9,27 @@
 <script>
     export default {
 		name: 'loading',
+        data () {
+            return {
+                status: !1,
+            }
+        },
+        methods: {
+            show () {
+                this.status = 1;
+            },
+            hide () {
+                this.status = !1;
+            }
+        }
     }
 </script>
 
 <style lang="scss" scoped>
 @import '../../style/mixin';
 .loading-wrap {
-    @include allcover;
+    @include fixed;
+    z-index: 1001;
     @include wh(100%, 100%);
     background-color: rgba(255,255,255,.1);
     .loading-box {
