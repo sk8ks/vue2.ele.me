@@ -1,7 +1,8 @@
 import App from '@/App'
 
-const construction = r => require.ensure([], () => r(require('@/components/common/construction')), 'construction');
-const home = r => require.ensure([], () => r(require('@/views/home/home')), 'home');
+const construction = r => require.ensure([], () => r(require('components/common/construction')), 'construction');
+const home = r => require.ensure([], () => r(require('views/home/home')), 'home');
+const categories = r => require.ensure([], () => r(require('views/categories/categories')), 'home');
 
 export default [
 	{
@@ -28,7 +29,10 @@ export default [
 			},
 			{
 				path: 'msite/food',
-				component: construction
+				component: categories,
+				meta: {
+
+				}
 			},
 			{
 				path: 'discover',
