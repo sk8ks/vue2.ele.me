@@ -6,6 +6,7 @@
  * staticUrl: 静态资源域名地址
  * apiUrl: 接口域名地址
  */
+
 let baseUrl = '';
 let apiUrl = '';
 let routerMode = 'history';
@@ -15,7 +16,9 @@ if (process.env.NODE_ENV == 'development') {
 
 }
 else if(process.env.NODE_ENV == 'production'){
-
+	baseUrl = 'http://rossi.wang:3001';
+	staticUrl = 'http://rossi.wang:8081';
+	apiUrl = 'http://rossi.wang:3101'
 }
 
 export {
