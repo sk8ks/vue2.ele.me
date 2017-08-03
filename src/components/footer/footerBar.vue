@@ -155,7 +155,7 @@
         bottom: 0;
         @include wh(100%, 4rem);
         display: flex;
-        box-shadow: 0 -0.026667rem 0.053333rem rgba(0,0,0,.1);
+        box-shadow: 0 -0.1rem 0.2rem rgba(0,0,0,.1);
         .item {
         	flex: 1;
         	display: flex;

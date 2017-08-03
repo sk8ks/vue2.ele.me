@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <div class="head-wraper">
+        <div class="head-wrapper">
             <button class="btn-back" @click="back"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use></svg></button>
             <h1 class="title">{{title}}</h1>
         </div>
@@ -42,7 +42,7 @@
     color: #fff;
     font-size: .48rem;
     background-color: #2395ff;
-    .head-wraper {
+    .head-wrapper {
         @include flex();
         @include flex-align();
         @include wh(100%, 100%);
@@ -54,6 +54,7 @@
             line-height: 3.666667rem;
             text-align: center;
             @include font(1.4rem, 3.666667rem);
+            font-weight: 500;
             color: $fc;
         }
         .btn-back {
