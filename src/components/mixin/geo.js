@@ -1,6 +1,9 @@
 
 /**
- *
+ * [fail description]
+ * @param  {[type]}   error [description]
+ * @param  {Function} cb    [description]
+ * @return {[type]}         [description]
  */
 const fail = (error, cb) => {
     switch(error.code) {

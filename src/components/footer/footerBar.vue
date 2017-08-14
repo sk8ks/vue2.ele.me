@@ -85,7 +85,7 @@
             </svg> -->
             <span>订单</span>
         </a>
-        <a @click="gotoAddress('/profile')" class="item" :class="{active: path == '/profile'}">
+        <a @click="gotoAddress('/profile')" class="item" :class="{active: path.match(/^\/profile/)}">
             <img :src="profileImage" alt="我的" class="icon">
         	<!-- <svg class="icon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="$route.path.indexOf('profile') !== -1? '#profileActive' : '#profile'"></use>
@@ -118,18 +118,14 @@
             ...mapState([
                 'geohash'
             ]),
-            foodImage () {
-                return (this.path == '/' || this.path == '/msite') ? foodActiveImage : foodImage
-            },
-            discoverImage () {
-                return this.path == '/discover' ? discoverActiveImage : discoverImage
-            },
-            orderImage () {
-                return this.path == '/order' ? orderActiveImage : orderImage
-            },
-            profileImage () {
-                return this.path == '/profile' ? profileActiveImage : profileImage
-            },
+            isInFood () {return this.path.match(/^\/$/) || this.path.match(/^\/msite/)},
+            isInDiscover () {return this.path.match(/^\/discover/)},
+            isInOrder () {return this.path.match(/^\/order/)},
+            isInProfile () {return this.path.match(/^\/profile/)},
+            foodImage () {return this.isInFood ? foodActiveImage : foodImage},
+            discoverImage () {return this.isInDiscover ? discoverActiveImage : discoverImage},
+            orderImage () {return this.isInOrder ? orderActiveImage : orderImage},
+            profileImage () {return this.isInProfile ? profileActiveImage : profileImage},
         },
         mounted(){},
         methods: {

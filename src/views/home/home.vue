@@ -52,6 +52,7 @@
 
 			</div>
 			<footer-bar></footer-bar>
+			<back-top></back-top>
 		</div>
 		<search-address mode="reveal" ref="searchAddress"></search-address>
 	</div>
@@ -65,6 +66,7 @@
 	import restaurantList from 'components/common/restaurantList'
 	import searchAddress from './children/searchAddress'
 	import footerBar from 'components/footer/footerBar'
+	import backTop from 'components/common/backTop'
 
 	export default {
 		name: 'home',
@@ -130,6 +132,7 @@
 			entrySwipe,
 			restaurantList,
 			searchAddress,
+			backTop,
 		}
 	}
 </script>

@@ -1,11 +1,5 @@
-
-
-/**
- *
- */
-// export const isArray = (ary) => {
-// 	return Array.isArray(ary);
-// }
+// const {cookies} = require('@/plugins/cookies.min');
+import '@/plugins/js.cookie';
 /**
  *	是否为空数组
  */
@@ -104,12 +98,48 @@ export const setStore = (name, content) => {
 /**
  * 获取localStorage
  */
-export const getStore = name => name && window.localStorage.getItem(name);
+export const getStore = name => typeof name === 'string' && window.localStorage.getItem(name);
 
 /**
  * 删除localStorage
  */
 export const removeStore = name => name && window.localStorage.removeItem(name);
+/**
+ * 存储sessionStorage
+ */
+export const setSession = (name, content) => {
+	if (typeof name === 'string') {
+		typeof content !== 'string' && (content = JSON.stringify(content));
+		window.sessionStorage.setItem(name, content);
+	}
+}
+/**
+ * [setCookies description]
+ * @param {String} name   [description]
+ * @param {String} content [description]
+ */
+export const setCookies = (name, content) => {
+	if (typeof name === 'string') {
+		typeof content !== 'string' && (content = JSON.stringify(content));
+		Cookies.set(name, content);
+	}
+}
+/**
+ * [getCookies description]
+ * @param  {String} name [description]
+ * @return {[type]}     [description]
+ */
+export const getCookies = name => typeof name === 'string' ? Cookies.get(name) : '';
+/**
+ * [removeCookie description]
+ * @param  {String} name [description]
+ * @return {[type]}     [description]
+ */
+export const removeCookies = name => {
+	if( typeof name === 'string' ) {
+		Cookies.remove(name);
+	}
+}
 
 /**
  * 获取style样式

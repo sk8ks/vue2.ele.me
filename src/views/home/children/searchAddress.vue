@@ -12,7 +12,6 @@
             </header>
             <section class="search-sect">
                     <input type="search" placeholder="请输入地址" autofocus="autofocus" class="" @keyup.13="searchAddressNearby" v-model="address">
-
             </section>
             <section class="address-list" v-if="addressList.length">
                 <div class="item" v-for="(address, index) in addressList" @click="updateAddress">
@@ -76,7 +75,7 @@
                 this.entriesAction();
                 // 更新餐馆
                 this.restaurantsAction();
-                this.close();
+                this.popupClose();
             }
         },
         components: {popup}
@@ -151,11 +150,13 @@
         padding: .6rem 1.2rem;
         border-top: #eee solid 1px;
         .title {
-            @include font(1.2rem, 2rem);
+            line-height: 1.5;
+            font-size: 1.2rem;
             font-weight: 500;
         }
         .info {
-            @include font(1rem, 1rem);
+            line-height: 1.5;
+            font-size: 1rem;
             color: #999;
         }
     }
