@@ -1,11 +1,17 @@
 
 import 'whatwg-fetch'
 import api from './api'
+import {getToken} from './auth'
 /**
- *
+ * [f description]
+ * @param  {String}  [url='']     [description]
+ * @param  {Object}  [data={}]    [description]
+ * @param  {String}  [type='GET'] [description]
+ * @return {Promise}              [description]
  */
 const f = async (url = '', data = {}, type = 'GET') => {
     type = type.toUpperCase();
+    const auth = getToken();
     if (type === 'GET') {
 		let dataStr = '';
 		Object.keys(data).forEach(key => {
@@ -27,6 +33,9 @@ const f = async (url = '', data = {}, type = 'GET') => {
 		mode: "cors",
         cache: "force-cache",
 	}
+    if (auth) {
+        requestConfig.headers.Authorization = `Bearer `+ auth;
+    }
 
     if (type == 'POST') {
         Object.defineProperty(requestConfig, 'body', {
@@ -36,19 +45,20 @@ const f = async (url = '', data = {}, type = 'GET') => {
 
     try {
         const res = await fetch(url, requestConfig);
-        const resJson = await res.json();
-        return resJson;
+        return res.json();
     } catch (error) {
         throw new Error(error)
     }
 }
 
-
-// export const getUserInfo = () => fetch(url.userInfoAction, postJSONConfig({uid: getStore('uid')}));
-//
+export const login                  = query => f(api.login, query, 'POST');
+export const fetchCurrentUser       = query => f(api.currentUser, query);
+export const fetchUserInfo          = uid => f(api.userInfo + uid);
 export const fetchGeolocation       = query => f(api.reverseGeoCoding, query);
 export const fetchEntries           = query => f(api.entries, query);
 export const fetchHotSearchWords    = query => f(api.hotSearchWords, query);
 export const fetchRestaurants       = query => f(api.restaurants, query);
 export const fetchAddressNearby     = query => f(api.searchAddressNearby, query);
 export const fetchCategory          = query => f(api.category, query);
+export const fetchVerifyCode        = query => f(api.verifyCode, query, 'POST');
+export const fetchUserOrders        = (uid, query) => f(api.userInfo + uid + '/orders', query);
