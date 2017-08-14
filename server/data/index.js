@@ -5,6 +5,10 @@ const hotSearchWords = require('./hotSearchWords');
 const restaurants = require('./restaurants');
 const searchAddressNearby = require('./searchAddressNearby');
 const categories = require('./categories');
+const vcode = require('./vcode');
+const loginUser = require('./loginUser');
+const orders = require('./orders');
+const oldOrders = require('./oldOrders');
 
 module.exports = {
     weather: weather,
@@ -14,4 +18,8 @@ module.exports = {
     restaurants: restaurants,
     searchAddressNearby: searchAddressNearby,
     categories: categories,
+    vcode: vcode,
+    loginUser: loginUser,
+    orders: orders,
+    oldOrders: oldOrders,
 }
