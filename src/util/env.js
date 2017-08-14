@@ -1,29 +1,29 @@
 /**
- * 配置开发环境和线上环境的接口域名
+ * 配置开发环境和线上环境
  *
- * baseUrl: 域名地址
+ * baseHost: 主机地址
  * routerMode: 路由模式
- * staticUrl: 静态资源域名地址
- * apiUrl: 接口域名地址
+ * staticHost: 静态资源主机
+ * apiHost: 数据接口主机
  */
 
-let baseUrl = '';
-let apiUrl = '';
+let baseHost = '';
+let apiHost = '';
 let routerMode = 'history';
-let staticUrl = '';
+let staticHost = '';
 
 if (process.env.NODE_ENV == 'development') {
 
 }
 else if(process.env.NODE_ENV == 'production'){
-	baseUrl = 'http://rossi.wang:3001';
-	staticUrl = 'http://rossi.wang:8081';
-	apiUrl = 'http://rossi.wang:3101'
+	baseHost = 'http://rossi.wang:3001';
+	staticHost = 'http://rossi.wang:8081';
+	apiHost = 'http://rossi.wang:3101'
 }
 
 export {
-	baseUrl,
+	baseHost,
 	routerMode,
-	staticUrl,
-	apiUrl
+	staticHost,
+	apiHost
 }
