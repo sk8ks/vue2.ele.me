@@ -1,0 +1,13 @@
+{
+	"apps" : [{
+		"name"        : "vue2.ele.me",
+		"script"      : "./build/dev-server.js",
+		"cwd" 		  : "",
+		"env": {
+			"COMMON_VARIABLE": "true"
+		},
+		"env_production" : {
+			"NODE_ENV": "development"
+		}
+	}]
+}
