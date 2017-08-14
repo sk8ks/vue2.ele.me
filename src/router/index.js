@@ -2,10 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {routerMode} from '@/util/env'
 import routes from './routers'
+import store from '../store'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
 	routes,
 	mode: routerMode,
 	// strict: process.env.NODE_ENV !== 'production',
@@ -21,3 +22,15 @@ export default new VueRouter({
 		}
 	}
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.loginRedirect) {  	// 登录跳转
+        next({
+            query: {redirect: '/profile'}  // 登录成功后跳转到该路由
+        })
+    } else {
+        next();
+    }
+})
+
+export default router;
