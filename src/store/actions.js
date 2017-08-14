@@ -5,8 +5,18 @@ import {
     fetchRestaurants,
     fetchAddressNearby,
     fetchCategory,
+    fetchVerifyCode,
+    login,
+    fetchCurrentUser,
+    fetchUserInfo,
+    fetchUserOrders,
 } from '@/service'
-import {sleep} from 'components/common/utils'
+import {
+    sleep,
+    setCookies,
+    getCookies,
+    removeCookies,
+} from 'components/common/utils'
 
 export default {
     // 通过经纬度获取地理信息
@@ -58,5 +68,37 @@ export default {
     categoryAction({commit, getters, state}, query) {
         const coords = getters.coordinates;
         return fetchCategory( Object.assign({}, coords, query) );
+    },
+    // 发送验证短信
+    sendVcodeAction({commit, getters, state}, query) {
+        return fetchVerifyCode(query);
+    },
+    // 登录
+    loginAction({commit, getters, state}, query) {
+        return login(Object.assign({}, query));
+    },
+    // 获取当前用户id
+    async currentUserAction({commit, getters, state}) {
+        const user = await fetchCurrentUser();
+        if (user.userid) {
+            commit('AUTHENTICATED', !!1);
+        } else {
+            commit('AUTHENTICATED', !1);
+        }
+        return user;
+    },
+    // 用户信息
+    async userInfoAction({commit, getters, state}) {
+        const userId = getCookies('userid');
+        const userInfo = await fetchUserInfo(userId);
+        commit('RECORD_USER_INFO', userInfo);
+        return userInfo;
+    },
+    // 订单
+    async userOrdersAction({commit, getters, state}, query) {
+        const userId = getCookies('userid');
+        const orders = await fetchUserOrders(userId, Object.assign({}, query));
+        commit('RECORD_ORDERS', orders);
+        return orders;
     }
 }

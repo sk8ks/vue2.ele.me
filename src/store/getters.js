@@ -1,5 +1,8 @@
 
 export default {
+	token: state => state.token,
+	authenticated: state => state.authenticated,
+	userInfo: state => state.userInfo,
 	// 获取坐标
 	coordinates: state => ({
 		latitude: state.latitude,

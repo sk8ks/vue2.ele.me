@@ -5,6 +5,9 @@ import {
 	RECORD_ENTRYLIST,
 	RECORD_RESTAURANT_LIST,
 	RECORD_HOT_SEARCH_WORDS,
+	AUTHENTICATED,
+	RECORD_USER_INFO,
+	RECORD_ORDERS,
 } from './mutation-types.js'
 
 import {setStore, getStore} from 'components/common/utils'
@@ -54,6 +57,17 @@ export default {
 	// 更新餐馆列表
 	[RECORD_RESTAURANT_LIST](state, restaurantList) {
 		state.restaurantList = [...restaurantList];
+	},
+	// 更新认证状态
+	[AUTHENTICATED](state, authenticated) {
+		state.authenticated = authenticated;
+	},
+	// 更新用户信息
+	[RECORD_USER_INFO](state, userInfo) {
+		state.userInfo = userInfo;
+	},
+	// 更新订单
+	[RECORD_ORDERS](state, orders) {
+		state.orders = orders;
 	}
-
 }
