@@ -11,7 +11,13 @@ var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
-var router = require('../server/mock-server')
+var router = require('../server/server')
+var expressJwt = require('express-jwt')
+var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
+var {token} = require('../server/config')
+
+
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -48,6 +54,18 @@ Object.keys(proxyTable).forEach(function (context) {
   }
   app.use(proxyMiddleware(options.filter || context, options))
 })
+
+app.use(cookieParser())
+app.use(bodyParser.json())
+// token认证
+app.use(expressJwt({secret: token.secret}).unless({path: ['/login']}));
+app.use(function (err, req, res, next) {
+  if (err.name === "UnauthorizedError") {
+    console.log('err: ', err.message);
+    req.user = null;
+    next();
+  }
+});
 app.use('/api', router);
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
