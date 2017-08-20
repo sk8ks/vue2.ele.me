@@ -50,6 +50,7 @@ export default {
         let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
         restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r));
         await sleep(1000).then(() => commit('RECORD_RESTAURANT_LIST', restaurantList));
+        return restaurantList;
 
     },
     // 根据筛选参数返回餐馆列表

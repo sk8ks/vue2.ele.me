@@ -88,7 +88,9 @@
         },
         activated () {},
         mounted () {
-            this.restaurantsAction();
+            this.$emit('loadingShow');
+            this.restaurantsAction()
+                .then(res => this.$emit('loadingHide'));
         },
         methods: {
             ...mapActions(['restaurantsAction']),
@@ -107,7 +109,6 @@
             },
             loadMore () {
                 this.busy = 1;
-                console.log('loading... ' + new Date());
             }
         }
     }
@@ -115,7 +116,6 @@
 <style lang="scss" scoped>
 @import '../../style/mixin';
 .restaurant-list {
-
     .item {
         display: -webkit-flex;
         display: flex;

@@ -26,7 +26,9 @@
 						<img src="../../assets/placeholder.1.ele.me.svg" >
 					</div>
 				</section>
-				<entry-swipe v-if="initStatus"></entry-swipe>
+				<div class="entry-wrap" :class="{loading: !initStatus}">
+					<entry-swipe v-if="!geoError"></entry-swipe>
+				</div>
 				<h3 class="sect-title">推荐商家</h3>
 				<section v-if="loadStatus">
 					<div>
@@ -46,8 +48,8 @@
 					<p>饿了么正在以光速来到你身边</p>
 				</section>
 
-				<section class="restaurant-sect">
-					<restaurant-list v-if="initStatus"></restaurant-list>
+				<section class="restaurant-sect" :class="{loading: !initStatus}">
+					<restaurant-list v-if="!geoError"></restaurant-list>
 				</section>
 
 			</div>
@@ -73,7 +75,6 @@
 		props: [],
 		data () {
 			return {
-				// initStatus: 0,	//	初始化状态
 				geoError: null,	//	地理信息错误状态码
 				loadStatus: 0,	//	加载状态
 				// hotSearchWords: [],	// 热门词
@@ -85,22 +86,26 @@
 				'coordinates',
 				'addressName',
 				'hotSearchWords',
+				'entryList',
+				'restaurantList'
 			]),
-			initStatus () {return !this.geoError}
+			initStatus () {console.log(this.restaurantList)
+				return !this.geoError && this.restaurantList.length && this.entryList.length;
+			}
 		},
 		activated () {},
 		mixins: [mixins],
 		mounted () {
-			this.loadStatus = 1;
+			// this.loadStatus = 1;
 			let geo = this.geoLocation(pos => {
-				this.loadStatus = 0;
+				// this.loadStatus = 0;
 				// this.RECORD_COORDS({
 				// 	latitude: pos.coords.latitude,
 				// 	longitude: pos.coords.longitude,
 				// });
 				this.geolocationAction()
 			}, errCode => {
-				this.loadStatus = 0;
+				// this.loadStatus = 0;
 				this.geoError = errCode;
 			});
 			this.hotSearchWordsAction();
@@ -260,7 +265,21 @@
 		color: $fc9;
 	}
 }
+.entry-wrap {
+    height: 15rem;
+    background: $fc;
+}
+.entry-wrap.loading {
+    background: url('../../assets/placeholder.1.ele.me.svg') repeat-y;
+    background-size: 100%;
+}
 .restaurant-sect {
 	padding: 0 0 4rem;
+	height: auto;
+	background: url('../../assets/placeholder.2.ele.me.svg') repeat-y;
+	background-size: 100%;
+}
+.restaurant-sect.loading {
+	height: 100%;
 }
 </style>

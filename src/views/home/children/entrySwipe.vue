@@ -1,5 +1,5 @@
 <template>
-    <div class="entry-wrap">
+    <!-- <div class="entry-wrap" :class="{loading: !entryList.length}"> -->
         <swipe class="entry-swipe" :auto="0">
             <swipe-item class="item" v-for="(list, index_0) in entryList" :key="index_0">
                 <router-link :to="{ path: 'msite/food/' + item.link }" v-for="(item, index_1) in list" :key="index_1">
@@ -8,7 +8,7 @@
                 </router-link>
             </swipe-item>
         </swipe>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -43,13 +43,10 @@
 <style lang="scss" scoped>
 @import '../../../style/mixin';
 @import '../../../style/vue-swipe';
-.entry-wrap {
-    // height: 15rem;
-}
+
 .entry-swipe {
-    height: 15rem;
+    // height: 15rem;
     text-align: center;
-    background-color: #fff;
     color: #fff;
     font-size: 1rem;
     overflow: hidden;

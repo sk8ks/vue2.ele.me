@@ -6,7 +6,9 @@
                 v-on:loadingShow="loadingShow"
                 v-on:loadingHide="loadingHide"></aside-filter>
         </div>
-        <restaurant-list></restaurant-list>
+        <restaurant-list
+            v-on:loadingShow="loadingShow"
+            v-on:loadingHide="loadingHide"></restaurant-list>
         <loading ref="loading"></loading>
     </div>
 </template>
