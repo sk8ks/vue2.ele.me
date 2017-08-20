@@ -8,12 +8,12 @@
         <header-bar title="订单"></header-bar>
         <section>
             <div class="no-data-wrapper no-data" v-if="!authenticated">
-                <img src="/static/img/9fb04779371b5b162b41032baf5f3gif.gif" />
+                <img :src="errImg" />
                 <p>请登录后查看外卖订单</p>
                 <router-link :to="{ name: 'login', query: {redirect: '/order'} }" class="login-btn">立即登录</router-link>
             </div>
             <div class="no-data-wrapper no-data" v-if="authenticated">
-                <img src="/static/img/4efda8c6bf4734d39faf86fe190c3gif.gif" />
+                <img :src="noDataImg" />
                 <p>近三个月无外卖订单记录</p>
                 <section>
                     <span class="history-btn">
@@ -32,11 +32,13 @@
     import headerBar from 'components/header/headerBar'
     import footerBar from 'components/footer/footerBar'
     import loading from 'components/common/loading'
+    import {errImg, noDataImg} from '@/util/env'
     export default {
         name: 'order',
     	data(){
             return{
-
+                errImg: errImg,
+                noDataImg: noDataImg
             }
         },
         computed: {
