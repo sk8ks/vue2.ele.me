@@ -22,8 +22,8 @@ export default {
     // 通过经纬度获取地理信息
     async geolocationAction({commit, getters, state}) {
         const coords = getters.coordinates;
-		const res = await fetchGeolocation(coords);
-		commit('RECORD_GEO', res);
+		const geo = await fetchGeolocation(coords);
+		commit('RECORD_GEO', geo);
 	},
     // 获取分类入口
     async entriesAction({commit, getters, state}) {
@@ -38,11 +38,14 @@ export default {
         entryList.length && entries.map((v,i,s) => entryList[parseInt(i/8)].push(v));
         commit('RECORD_ENTRIES', entries);
         commit('RECORD_ENTRYLIST', entryList);
+        return entryList;
     },
     // 更新热搜词
     async hotSearchWordsAction({commit, getters, state}) {
         const coords = getters.coordinates;
-        commit('RECORD_HOT_SEARCH_WORDS', await fetchHotSearchWords(coords));
+        const hsw = await fetchHotSearchWords(coords);
+        commit('RECORD_HOT_SEARCH_WORDS', hsw);
+        return hsw
     },
     // 餐馆列表数据
     async restaurantsAction({commit, getters, state}, query = {}) {
