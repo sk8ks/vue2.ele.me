@@ -1,6 +1,6 @@
-import {apiHost} from '@/util/env'
+import {apiUrl} from '@/util/env'
 
-const getApiUrl = url => apiHost + url;
+const getApiUrl = url => apiUrl + url;
 
 export default {
     login:                  getApiUrl('/api/login'),    // 登录

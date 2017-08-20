@@ -51,7 +51,7 @@ const f = async (url = '', data = {}, type = 'GET') => {
     }
 }
 
-export const login                  = query => f(api.login, query, 'POST');
+export const login                  = query => f(api.login, query, 'POST'); 
 export const fetchCurrentUser       = query => f(api.currentUser, query);
 export const fetchUserInfo          = uid => f(api.userInfo + uid);
 export const fetchGeolocation       = query => f(api.reverseGeoCoding, query);
