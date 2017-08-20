@@ -332,7 +332,7 @@
         // @include flex;
         max-height: 0;
         border-top: 1px solid #ddd;
-        @include transition(.2s, ease-in-out);
+        @include transition;
         background-color: $fc;
         visibility: hidden;
         overflow: auto;
@@ -399,6 +399,7 @@
         max-height: 1000%;
     }
     .filter-wrapper.filter-category {
+        @include flex;
         height: 1000%;
     }
     .filter-wrapper.filter-sort {
