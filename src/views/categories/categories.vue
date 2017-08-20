@@ -21,7 +21,7 @@
     } from 'components/common/utils'
     import headerBar from 'components/header/headerBar'
     import asideFilter from 'components/asideFilter/asideFilter'
-    import restaurantList from 'components/common/restaurantList'
+    import restaurantList from 'views/home/children/restaurantList'
     import loading from 'components/common/loading'
 
     export default {

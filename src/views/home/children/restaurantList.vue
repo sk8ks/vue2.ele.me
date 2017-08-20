@@ -1,6 +1,6 @@
 <template>
     <section class="restaurant-list">
-        <div class="item" v-for="(item, index_0) in restaurantList" :key="index_0">
+        <div class="item" v-for="(item, index_0) in restaurants" :key="index_0">
             <div class="logo">
                 <div class="new" v-if="item.is_new"><span>新店</span></div>
                 <img :alt="item.name" :src="item.image_path">
@@ -75,9 +75,10 @@
         props: [],
         data () {
             return {
-                // restaurants: [],    // 餐馆列表
+                restaurants: [],    // 餐馆列表
                 activityMoreStatus: !1,     // 更多活动显示状态
                 busy: !1,
+
             }
         },
         computed: {
@@ -90,7 +91,10 @@
         mounted () {
             this.$emit('loadingShow');
             this.restaurantsAction()
-                .then(res => this.$emit('loadingHide'));
+                .then(res => {
+                    this.restaurants = res;
+                    this.$emit('loadingHide');
+                });
         },
         methods: {
             ...mapActions(['restaurantsAction']),
@@ -114,7 +118,7 @@
     }
 </script>
 <style lang="scss" scoped>
-@import '../../style/mixin';
+@import '../../../style/mixin';
 .restaurant-list {
     .item {
         display: -webkit-flex;

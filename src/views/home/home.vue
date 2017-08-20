@@ -65,7 +65,7 @@
 	import {eventHub} from 'components/common/eventHub'
 	import mixins from 'components/mixin'
 	import entrySwipe from './children/entrySwipe'
-	import restaurantList from 'components/common/restaurantList'
+	import restaurantList from './children/restaurantList'
 	import searchAddress from './children/searchAddress'
 	import footerBar from 'components/footer/footerBar'
 	import backTop from 'components/common/backTop'
