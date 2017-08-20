@@ -1,6 +1,6 @@
 
-const config = require('./config')
-const {userInfo} = require('./data/loginUser')
+const config = require('../config')
+const {userInfo} = require('../data/loginUser')
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
 

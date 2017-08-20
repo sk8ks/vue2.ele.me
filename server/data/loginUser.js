@@ -1,5 +1,5 @@
 // 本地用户数据
-const {createToken} = require('../token');
+const {createToken} = require('../auth/token');
 const token = createToken('3678');
 
 module.exports = {

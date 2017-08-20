@@ -1,5 +1,5 @@
 
-const {token} = require('./config')
+const {token} = require('../config')
 const jwt = require('jsonwebtoken')
 
 

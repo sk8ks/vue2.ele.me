@@ -16,7 +16,7 @@ const {
     oldOrders,
 } = require('./data/index');
 const {token} = require('./config');
-const {authenticate} = require('./authorization')
+const {authenticate} = require('./auth/authorization')
 
 
 // 手机验证码
