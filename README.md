@@ -12,7 +12,13 @@ webpack2 + vue2 + vuex + vue-router + ES6/7 + fetch + sass + svg
 
   npm run dev (本地运行后访问 http://localhost:8080)
 # 在线DEMO
+
+<img src="http://rossi.wang:8081/vue2.ele.me/1503386470.png" width="180px" height="180px" />
+
+<p>建议用扫描上方二维码，并在手机浏览器中预览</p>
+
 http://rossi.wang:3001
+
 # 项目功能
 项目功能基本参照官方版本
 * 首页
