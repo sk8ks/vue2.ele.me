@@ -1,6 +1,6 @@
 
-const config = require('../config')
-const {userInfo} = require('../data/loginUser')
+const config = require('../config/config')
+const { userInfo } = require('../data/loginUser')
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
 
@@ -11,9 +11,9 @@ const moment = require('moment')
  * @param  {String} uid          [description]
  * @return {[type]}              [description]
  */
-const authenticate = (decodedToken, uid) => {
+const authenticate = (decodedToken) => {
     const now = moment().valueOf();
-    if( decodedToken.id == userInfo.id && userInfo.user_id == uid ) {
+    if( decodedToken.id == userInfo.id ) {
         return !!1;
     } else {
         return !1;

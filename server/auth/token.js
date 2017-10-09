@@ -1,6 +1,6 @@
 
-const {token} = require('../config')
-const jwt = require('jsonwebtoken')
+const {token} = require('../config/config');
+const jwt = require('jsonwebtoken');
 
 
 // 生成token

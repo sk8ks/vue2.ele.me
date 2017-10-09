@@ -14,9 +14,10 @@ const {
     loginUser,
     orders,
     oldOrders,
-} = require('./data/index');
-const {token} = require('./config');
-const {authenticate} = require('./auth/authorization')
+} = require('../data/index');
+const {token} = require('../config/config');
+const {authenticate} = require('../auth/authorization');
+const shuffle = require('../utils/shuffle');
 
 
 // 手机验证码
@@ -36,19 +37,35 @@ router.get('/register', (req, res, next) => {
 });
 // 登录
 router.post('/login', (req, res, next) => {
-    let account = req.body.account;
-    let password = req.body.password;
-    let type = req.body.type;
+    const account = req.body.account;
+    const password = req.body.password;
+    const type = req.body.type;
     if ( (type == 'sms' && (account == loginUser.userInfo.mobile && password == loginUser.vcode)) || (account == loginUser.userInfo.username && password == loginUser.password) ) {
         res.cookie('token', loginUser.token, {expires: token.expires, path: '/'});
         res.cookie('userid', loginUser.userInfo.user_id, {expires: token.expires, path: '/'});
         res.json({
-            login: 1
+            login: !!1,
+            userid: loginUser.userInfo.user_id
         });
     } else {
         res.json({
             login: !1,
             message: '帐号或密码不正确'
+        });
+    }
+});
+// 退出登录
+router.post('/logout', (req, res, next) => {
+    const userid = req.body.userid;
+    if ( loginUser.user_id == userid ) {
+        // res.cookie('token', loginUser.token, {maxAge: 0, path: '/'});
+        // res.cookie('userid', loginUser.userInfo.user_id, {maxAge: 0, path: '/'});
+        res.json({
+            login: !1
+        });
+    } else {
+        res.json({
+            message: '退出登录失败，请重新尝试'
         });
     }
 });
@@ -74,14 +91,14 @@ router.get('/reverse_geo_coding', (req, res, next) => {
     res.json(geolocation);
 });
 // 食品分类入口
-router.get('/entries', (req, res, next) => {
+router.get('/entries', (req, res, next) => {console.log(23123)
     res.json(entries);
 });
 router.get('/hot_search_words', (req, res, next) => {
     res.json(hotSearchWords);
 });
 router.get('/restaurants', (req, res, next) => {
-    res.json(restaurants);
+    res.json(shuffle(restaurants));
 });
 router.get('/search_address_nearby', (req, res, next) => {
     res.json(searchAddressNearby);

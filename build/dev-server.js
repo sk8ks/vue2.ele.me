@@ -11,11 +11,11 @@ var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
-var router = require('../server/server')
+var router = require('../server/routers/expressApiRouter')
 var expressJwt = require('express-jwt')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
-var {token} = require('../server/config')
+var {token} = require('../server/config/config')
 
 
 
