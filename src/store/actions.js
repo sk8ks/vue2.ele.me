@@ -30,7 +30,7 @@ export default {
         const coords = getters.coordinates;
         const geohash = getters.geohash;
         const res = await fetchEntries(coords);
-        const entries = res[0].entries.map((e,i,ary) => {
+        const entries = res.entries.map((e,i,ary) => {
             const newlink = decodeURIComponent(e.link);
             return Object.assign({}, e, {link: '#geohash='+geohash+'#'+newlink.slice(newlink.indexOf('target'))});
         });
@@ -48,21 +48,22 @@ export default {
         return hsw
     },
     // 餐馆列表数据
-    async restaurantsAction({commit, getters, state}, query = {}) {
+    restaurantsAction({commit, getters, state}, query = {}) {
         const coords = getters.coordinates;
-        let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
-        restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r));
-        await sleep(1000).then(() => commit('RECORD_RESTAURANT_LIST', restaurantList));
-        return restaurantList;
-
+        return fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
+        // let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
+        // restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r));
+        // await sleep(1000).then(() => commit('RECORD_RESTAURANT_LIST', restaurantList));
+        // return restaurantList;
     },
     // 根据筛选参数返回餐馆列表
-    async filterRestaurantsAction({commit, getters, state}, query = {}) {
-        const coords = getters.coordinates;
-        let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
-        restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r));
-        await sleep(1000).then(() => commit('RECORD_RESTAURANT_LIST', restaurantList.reverse()));
-    },
+    // async filterRestaurantsAction({commit, getters, state}, query = {}) {
+    //     const coords = getters.coordinates;
+    //     let restaurantList = await fetchRestaurants(Object.assign({}, coords, {offset: 0, limit: 20}, query));
+    //     restaurantList = restaurantList.map((r,i,rest) => Object.assign({activity_more_status: !1}, r));
+    //     await sleep(1000).then(() => commit('RECORD_RESTAURANT_LIST', restaurantList));
+    //     return restaurantList;
+    // },
     // 附近地区
     searchAddressNearbyAction({commit, getters, state}, query) {
         const coords = getters.coordinates;
@@ -81,7 +82,7 @@ export default {
     loginAction({commit, getters, state}, query) {
         return login(Object.assign({}, query));
     },
-    // 获取当前用户id
+    // 认证用户信息，获取当前用户id
     async currentUserAction({commit, getters, state}) {
         const user = await fetchCurrentUser();
         if (user.userid) {
