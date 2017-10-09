@@ -49,7 +49,7 @@
 				</section>
 
 				<section class="restaurant-sect" :class="{loading: !initStatus}">
-					<restaurant-list v-if="!geoError"></restaurant-list>
+					<restaurant-list v-if="!geoError" :restaurants="restaurants"></restaurant-list>
 				</section>
 
 			</div>
@@ -65,7 +65,7 @@
 	import {eventHub} from 'components/common/eventHub'
 	import mixins from 'components/mixin'
 	import entrySwipe from './children/entrySwipe'
-	import restaurantList from './children/restaurantList'
+	import restaurantList from 'components/restaurantList/restaurantList'
 	import searchAddress from './children/searchAddress'
 	import footerBar from 'components/footer/footerBar'
 	import backTop from 'components/common/backTop'
@@ -78,6 +78,7 @@
 				geoError: null,	//	地理信息错误状态码
 				loadStatus: 0,	//	加载状态
 				// hotSearchWords: [],	// 热门词
+				restaurants: [],	// 餐馆列表
 				busy: !1,
 			}
 		},
@@ -89,7 +90,7 @@
 				'entryList',
 				'restaurantList'
 			]),
-			initStatus () {console.log(this.restaurantList)
+			initStatus () {
 				return !this.geoError && this.restaurantList.length && this.entryList.length;
 			}
 		},
@@ -109,18 +110,18 @@
 				this.geoError = errCode;
 			});
 			this.hotSearchWordsAction();
+			this.restaurantsAction()
+				.then(res => this.restaurants = res)
+				.catch(error => console.warn(error));
 		},
 
 		methods: {
 			...mapMutations(['RECORD_COORDS']),
 			...mapActions([
 				'geolocationAction',
-				'hotSearchWordsAction'
+				'hotSearchWordsAction',
+				'restaurantsAction',
 			]),
-			// hotSearch () {
-			// 	// this.hotSearchWordsAction().then(res => this.hotSearchWords = res);
-			// 	this.hotSearchWordsAction();
-			// },
 			// 显示选择地址
 			searchAddressOpen () {
 				eventHub.$emit('searchAddressOpen');

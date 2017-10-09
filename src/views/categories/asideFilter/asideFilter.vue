@@ -100,13 +100,14 @@
     import {
         serializeObject,
         array2Object,
-    } from 'components/common/utils'
-    import mixins from 'components/mixin'
-    import loading from 'components/common/loading'
+    } from '../../../components/common/utils'
+    import mixins from '../../../components/mixin'
+    import loading from '../../../components/common/loading'
     import {filterSort, filterDelivery, filterProp} from './filter'
 
     export default {
         name: 'aside-filter',
+        props: ['restaurants'],
         data () {
             return {
                 navOpenStatus: 0,  // 菜单状态
@@ -136,6 +137,9 @@
             }
         },
         mixins: [mixins],
+        mounted () {
+            this._fetchRestaurants();
+        },
         methods: {
             ...mapActions([
                 'categoryAction',
@@ -176,16 +180,27 @@
                 this.queryCategoryIds = subCategory.id || '';
                 this.categoryName = subCategory.name;
                 this.currentSubCategoryIndex = index;
-                this.$emit('loadingShow');
-                this.filterRestaurantsAction({
+                this._fetchRestaurants({
                     ['extras[]']: this.queryExtras,
                     ['restaurant_category_ids[]']: this.queryCategoryIds,
                     order_by: this.querySortOrder
-                })
-                .then(() => {
-                    this.$emit('loadingHide');
-                })
-
+                });
+                // this.filterRestaurantsAction({
+                //     ['extras[]']: this.queryExtras,
+                //     ['restaurant_category_ids[]']: this.queryCategoryIds,
+                //     order_by: this.querySortOrder
+                // })
+                // .then(() => {
+                //     this.$emit('loadingHide');
+                // })
+            },
+            /**
+             * 获取餐馆列表
+             * @param  {Object} [query={}] [description]
+             * @return {[type]}            [description]
+             */
+            _fetchRestaurants (query = {}) {
+                this.$emit('fetchRestaurant', query);
             },
 
             /**
@@ -197,15 +212,20 @@
                 this.navOpenStatus = 0;
                 this.querySortOrder = order.id;
                 this.sortName = order.name;
-                this.$emit('loadingShow');
-                this.filterRestaurantsAction({
+                this._fetchRestaurants({
                     ['extras[]']: this.queryExtras,
                     ['restaurant_category_ids[]']: this.queryCategoryIds,
                     order_by: this.querySortOrder
-                })
-                .then(() => {
-                    this.$emit('loadingHide');
                 });
+                // this.$emit('loadingShow');
+                // this.filterRestaurantsAction({
+                //     ['extras[]']: this.queryExtras,
+                //     ['restaurant_category_ids[]']: this.queryCategoryIds,
+                //     order_by: this.querySortOrder
+                // })
+                // .then(() => {
+                //     this.$emit('loadingHide');
+                // });
             },
 
             /**
@@ -247,17 +267,24 @@
              */
             submitFilterProp () {
                 this.navOpenStatus = 0;
-                this.$emit('loadingShow');
-                this.filterRestaurantsAction({
+                this._fetchRestaurants({
                     ['extras[]']: this.queryExtras,
                     ['restaurant_category_ids[]']: this.queryCategoryIds,
                     order_by: this.querySortOrder,
                     ['support_ids[]']: this.selectedProp,
                     ['delivery_mode[]']: this.selectedDelivery,
-                })
-                .then(() => {
-                    this.$emit('loadingHide');
                 });
+                // this.$emit('loadingShow');
+                // this.filterRestaurantsAction({
+                //     ['extras[]']: this.queryExtras,
+                //     ['restaurant_category_ids[]']: this.queryCategoryIds,
+                //     order_by: this.querySortOrder,
+                //     ['support_ids[]']: this.selectedProp,
+                //     ['delivery_mode[]']: this.selectedDelivery,
+                // })
+                // .then(() => {
+                //     this.$emit('loadingHide');
+                // });
             },
             closeAsideFilter () {
                 this.navOpenStatus = 0;
@@ -266,7 +293,7 @@
     }
 </script>
 <style lang="scss" scoped>
-    @import '../../style/mixin';
+    @import '../../../style/mixin';
     .modal {
         position: fixed;
         left: 0;

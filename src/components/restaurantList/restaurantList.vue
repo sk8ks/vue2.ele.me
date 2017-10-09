@@ -72,10 +72,9 @@
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     export default {
         name: 'restaurants',
-        props: [],
+        props: ['restaurants'],
         data () {
             return {
-                restaurants: [],    // 餐馆列表
                 activityMoreStatus: !1,     // 更多活动显示状态
                 busy: !1,
 
@@ -84,18 +83,11 @@
         computed: {
             ...mapGetters([
                 'coordinates',
-                'restaurantList'
+                // 'restaurantList'
             ]),
         },
         activated () {},
-        mounted () {
-            this.$emit('loadingShow');
-            this.restaurantsAction()
-                .then(res => {
-                    this.restaurants = res;
-                    this.$emit('loadingHide');
-                });
-        },
+        mounted () {},
         methods: {
             ...mapActions(['restaurantsAction']),
             // 计算分数区域宽度
@@ -108,7 +100,6 @@
             },
             // 活动显示开关
             activitySwitch (item) {
-                // const activityMoreStatus = item.activity_more_status;
                 item.activity_more_status = !item.activity_more_status
             },
             loadMore () {
@@ -118,7 +109,7 @@
     }
 </script>
 <style lang="scss" scoped>
-@import '../../../style/mixin';
+@import '../../style/mixin';
 .restaurant-list {
     .item {
         display: -webkit-flex;
