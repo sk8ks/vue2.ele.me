@@ -12,13 +12,13 @@ webpack2 + vue2 + vuex + vue-router + ES6/7 + fetch + sass + svg
 
   npm install
   
-  pm2 startOrRestart ecosystem.json (本地运行后访问 http://localhost:8080)
+  如您不使用pm2，也可直接运行dev-server，更改package配置：
   
-  如您不使用以上方式，也可以更改package配置：
-  
+  <del>"scripts": { "start": "pm2 startOrRestart ecosystem.json"}</del>
   <pre>"scripts": { "start": "node build/dev-server.js"}</pre>
   
-  然后运行 npm start
+  npm start (本地运行后访问 http://localhost:8080)
+  
 # 在线DEMO
 
 <img src="http://rossi.wang:8081/vue2.ele.me/1503386470.png" width="180px" height="180px" />
@@ -30,12 +30,12 @@ http://rossi.wang:3001
 # 项目功能
 项目功能基本参照官方版本
 * 首页
-  + 定位
-  + 搜索地址
-  + 地址附近商家列表
+  + 地里定位(后续优化用户体验)
+  + 搜索地址(目前只是模拟了部分功能，后续将优化改进)
+  + 地址附近商家列表
 * 商家分类筛选列表
-* 个人中心
-* 订单
+* 个人中心(登录功能完成)
+* 订单(待完善)
 # 更新日志
 #### 8.15
     * 新增登录页，实现短信及密码登录功能
