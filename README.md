@@ -20,7 +20,7 @@ webpack2 + vue2 + vuex + vue-router + ES6/7 + fetch + sass + svg
   
 # 在线DEMO
 
-<img src="http://rossi.wang:8081/vue2.ele.me/1503386470.png" width="180px" height="180px" />
+<img src="http://rossi.wang:8081/qrcode/1508494028.png" width="180px" height="180px" />
 
 <p>建议用扫描上方二维码，并在手机浏览器中预览</p>
 
