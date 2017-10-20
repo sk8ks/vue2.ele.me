@@ -12,10 +12,9 @@ webpack2 + vue2 + vuex + vue-router + ES6/7 + fetch + sass + svg
 
   npm install
   
-  如您不使用pm2，也可直接运行dev-server，更改package配置：
+  如您不使用pm2，也可直接运行dev-server，更改package配置即可：
   
-  <del>"scripts": { "start": "pm2 startOrRestart ecosystem.json"}</del>
-  <pre>"scripts": { "start": "node build/dev-server.js"}</pre>
+  <pre>"scripts": { "start": "node build/dev-server.js" }</pre>
   
   npm start (本地运行后访问 http://localhost:8080)
   
