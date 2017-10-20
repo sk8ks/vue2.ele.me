@@ -91,7 +91,7 @@ router.get('/reverse_geo_coding', (req, res, next) => {
     res.json(geolocation);
 });
 // 食品分类入口
-router.get('/entries', (req, res, next) => {console.log(23123)
+router.get('/entries', (req, res, next) => {
     res.json(entries);
 });
 router.get('/hot_search_words', (req, res, next) => {

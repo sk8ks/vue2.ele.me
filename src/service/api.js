@@ -4,6 +4,7 @@ const getApiUrl = url => apiUrl + url;
 
 export default {
     login:                  getApiUrl('/api/login'),    // 登录
+    logout:                 getApiUrl('/api/logout'),    // 退出登录
     currentUser:            getApiUrl('/api/current_user'),     //  当前用户
     userInfo:               getApiUrl('/api/user/'),         // 用户信息
     reverseGeoCoding:       getApiUrl('/api/reverse_geo_coding'),   // 获取当前地理信息
